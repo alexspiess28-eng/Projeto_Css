@@ -12,7 +12,7 @@ body {
     background-color: var(--cor-fundo);/*definir a cor de fundo*/
     color: var(--cor-texto);/*a cor padrão dos textos*/
     font-family: Arial, Helvetica, sans-serif;/*Nossa fonte*/
-    line-height: 1.6;/*Aumenta os espaços entre as linhas*/
+    line-height: 1.6;/* Aumenta os espaços entre as linhas*/
     
 }
 
