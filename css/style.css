@@ -378,3 +378,33 @@ transform: translateY(-4px);
 .projeto-card p{
     color: var(--cor-texto-suave);
 }
+
+
+/* =====================================
+   AULA 08 - FORMULÁRIO COM JS
+===================================== */
+
+.mensagem-erro {
+    display: block;
+    margin-top: 0.3rem;
+    color: #b00020;
+    font-size: 0.9rem;
+}
+
+.campo input.erro,
+.campo textarea.erro {
+    border-color: #b00020;
+}
+
+.status-formulario {
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.status-formulario.sucesso {
+    color: #146c2e;
+}
+
+.status-formulario.erro {
+    color: #b00020;
+}
