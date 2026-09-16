@@ -1,183 +1,544 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Início - Meu Projeto Web</title>
-
-    <link rel="stylesheet" href="css/style.css">
-
-    <script src="js/script.js" defer></script>
-</head>
-
-<body>
-
-    <header class="cabecalho">
-
-        <div class="container cabecalho-conteudo">
-
-            <h1>Meu Projeto Web</h1>
-
-            <nav
-                class="nav"
-                aria-label="Navegação principal"
-            >
-
-                <a
-                    class="ativo"
-                    href="index.html"
-                    aria-current="page"
-                >
-                    Início
-                </a>
-
-                <a href="sobre.html">
-                    Sobre
-                </a>
-
-                <a href="contato.html">
-                    Contato
-                </a>
-
-            </nav>
-
-        </div>
-
-    </header>
+// ======================================
+// SCRIPT GERAL DO PROJETO
+// AULAS 07 E 08
+// ======================================
 
 
-    <main class="container">
+// ======================================
+// AULA 07 - CATÁLOGO
+// ======================================
 
-        <section class="secao">
+const listaProjetos =
+    document.querySelector('#lista-projetos');
 
-            <h2>Bem-vindo ao projeto</h2>
+const busca =
+    document.querySelector('#busca');
 
-            <p>
-                Este projeto está sendo desenvolvido
-                durante as aulas de Front-end.
-            </p>
+const statusProjetos =
+    document.querySelector('#status');
 
-        </section>
+const contadorSelecionados =
+    document.querySelector('#contador-selecionados');
 
+const cards =
+    document.querySelectorAll('.projeto-card');
 
-        <section
-            id="projetos"
-            class="secao"
-        >
-
-            <div class="secao-cabecalho">
-
-                <div>
-                    <p class="tag">Catálogo</p>
-                    <h2>O que estamos aprendendo?</h2>
-                </div>
-
-                <span
-                    id="contador-selecionados"
-                    class="contador-projetos"
-                >
-                    0 selecionado(s)
-                </span>
-
-            </div>
+const botoesFiltro =
+    document.querySelectorAll('.btn-filtro');
 
 
-            <div class="campo-busca">
+if (
+    listaProjetos &&
+    busca &&
+    statusProjetos &&
+    contadorSelecionados &&
+    cards.length > 0
+) {
 
-                <label for="busca">
-                    Buscar projeto
-                </label>
-
-                <input
-                    type="search"
-                    id="busca"
-                    placeholder="Digite HTML, CSS ou Responsividade"
-                >
-
-            </div>
-
-
-            <p
-                id="status"
-                class="status"
-                role="status"
-                aria-live="polite"
-            >
-                4 projetos encontrados.
-            </p>
+    const estado = {
+        categoria: 'todos',
+        busca: '',
+        selecionados: new Set()
+    };
 
 
-            <div
-                class="filtros"
-                aria-label="Filtros do catálogo"
-            >
+    function cardCombina(card) {
 
-                <button
-                    type="button"
-                    class="btn-filtro ativo"
-                    data-filtro="todos"
-                >
-                    Todos
-                </button>
+        const categoria =
+            card.dataset.categoria;
 
-                <button
-                    type="button"
-                    class="btn-filtro"
-                    data-filtro="html"
-                >
-                    HTML
-                </button>
+        const texto =
+            card.textContent
+                .toLowerCase();
 
-                <button
-                    type="button"
-                    class="btn-filtro"
-                    data-filtro="css"
-                >
-                    CSS
-                </button>
+        const categoriaOk =
+            estado.categoria === 'todos'
+            ||
+            estado.categoria === categoria;
 
-                <button
-                    type="button"
-                    class="btn-filtro"
-                    data-filtro="responsivo"
-                >
-                    Responsivo
-                </button>
+        const buscaOk =
+            texto.includes(
+                estado.busca
+            );
 
-            </div>
+        return categoriaOk && buscaOk;
+    }
 
 
-            <div
-                id="lista-projetos"
-                class="grid-cards"
-            >
+    function renderizarCatalogo() {
 
-                <article
-                    class="card projeto-card"
-                    data-id="html-semantico"
-                    data-categoria="html"
-                >
+        let totalVisiveis = 0;
 
-                    <h3>HTML Semântico</h3>
 
-                    <p>
-                        Projeto criado para praticar
-                        header, nav, main, section,
-                        article e footer.
-                    </p>
+        cards.forEach(
+            function (card) {
 
-                    <button
-                        type="button"
-                        class="btn-selecionar"
-                        aria-pressed="false"
-                    >
-                        Selecionar
-                    </button>
+                const mostrar =
+                    cardCombina(card);
 
-                </article>
+                if (mostrar) {
+
+                    card.classList.remove(
+                        'escondido'
+                    );
+
+                    totalVisiveis++;
+
+                } else {
+
+                    card.classList.add(
+                        'escondido'
+                    );
+
+                }
+
+
+                const id =
+                    card.dataset.id;
+
+                const selecionado =
+                    estado.selecionados.has(id);
+
+                card.classList.toggle(
+                    'selecionado',
+                    selecionado
+                );
+
+
+                const botaoSelecionar =
+                    card.querySelector(
+                        '.btn-selecionar'
+                    );
+
+                if (botaoSelecionar) {
+
+                    botaoSelecionar.setAttribute(
+                        'aria-pressed',
+                        String(selecionado)
+                    );
+
+                    botaoSelecionar.textContent =
+                        selecionado
+                            ? 'Selecionado'
+                            : 'Selecionar';
+                }
+
+            }
+        );
+
+
+        statusProjetos.textContent =
+            totalVisiveis
+            +
+            ' projeto(s) encontrado(s).';
+
+
+        contadorSelecionados.textContent =
+            estado.selecionados.size
+            +
+            ' selecionado(s)';
+    }
+
+
+    botoesFiltro.forEach(
+        function (botao) {
+
+            botao.addEventListener(
+                'click',
+                function () {
+
+                    estado.categoria =
+                        botao.dataset.filtro;
+
+
+                    botoesFiltro.forEach(
+                        function (item) {
+
+                            item.classList.remove(
+                                'ativo'
+                            );
+
+                        }
+                    );
+
+
+                    botao.classList.add(
+                        'ativo'
+                    );
+
+
+                    renderizarCatalogo();
+                }
+            );
+
+        }
+    );
+
+
+    busca.addEventListener(
+        'input',
+        function () {
+
+            estado.busca =
+                busca.value
+                    .trim()
+                    .toLowerCase();
+
+            renderizarCatalogo();
+        }
+    );
+
+
+    // Delegação de evento:
+    // um listener no container atende todos os cards.
+    listaProjetos.addEventListener(
+        'click',
+        function (evento) {
+
+            const botao =
+                evento.target.closest(
+                    '.btn-selecionar'
+                );
+
+            if (!botao) {
+                return;
+            }
+
+
+            const card =
+                botao.closest(
+                    '.projeto-card'
+                );
+
+            if (!card) {
+                return;
+            }
+
+
+            const id =
+                card.dataset.id;
+
+
+            if (
+                estado.selecionados.has(id)
+            ) {
+
+                estado.selecionados.delete(id);
+
+            } else {
+
+                estado.selecionados.add(id);
+
+            }
+
+
+            renderizarCatalogo();
+        }
+    );
+
+
+    renderizarCatalogo();
+}
+
+
+// ======================================
+// AULA 08 - FORMULÁRIO
+// ======================================
+
+const formulario =
+    document.querySelector('#form-contato');
+
+
+if (formulario) {
+
+    const nome =
+        document.querySelector('#nome');
+
+    const email =
+        document.querySelector('#email');
+
+    const assunto =
+        document.querySelector('#assunto');
+
+    const mensagem =
+        document.querySelector('#mensagem');
+
+    const statusFormulario =
+        document.querySelector(
+            '#status-formulario'
+        );
+
+    const erroNome =
+        document.querySelector(
+            '#erro-nome'
+        );
+
+    const erroEmail =
+        document.querySelector(
+            '#erro-email'
+        );
+
+    const erroAssunto =
+        document.querySelector(
+            '#erro-assunto'
+        );
+
+    const erroMensagem =
+        document.querySelector(
+            '#erro-mensagem'
+        );
+
+
+    function limparErroCampo(
+        campo,
+        elementoErro
+    ) {
+
+        elementoErro.textContent = '';
+
+        campo.classList.remove(
+            'erro'
+        );
+
+        campo.removeAttribute(
+            'aria-invalid'
+        );
+    }
+
+
+    function marcarErro(
+        campo,
+        elementoErro,
+        texto
+    ) {
+
+        elementoErro.textContent =
+            texto;
+
+        campo.classList.add(
+            'erro'
+        );
+
+        campo.setAttribute(
+            'aria-invalid',
+            'true'
+        );
+    }
+
+
+    function emailValido(valor) {
+
+        const padrao =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        return padrao.test(valor);
+    }
+
+
+    function limparTodosErros() {
+
+        limparErroCampo(
+            nome,
+            erroNome
+        );
+
+        limparErroCampo(
+            email,
+            erroEmail
+        );
+
+        limparErroCampo(
+            assunto,
+            erroAssunto
+        );
+
+        limparErroCampo(
+            mensagem,
+            erroMensagem
+        );
+
+
+        statusFormulario.textContent =
+            '';
+
+        statusFormulario.classList.remove(
+            'sucesso',
+            'erro'
+        );
+    }
+
+
+    formulario.addEventListener(
+        'submit',
+        function (evento) {
+
+            evento.preventDefault();
+
+            limparTodosErros();
+
+
+            let formularioValido =
+                true;
+
+            let primeiroCampoComErro =
+                null;
+
+
+            if (
+                nome.value.trim() === ''
+            ) {
+
+                marcarErro(
+                    nome,
+                    erroNome,
+                    'Informe seu nome.'
+                );
+
+                formularioValido =
+                    false;
+
+                primeiroCampoComErro =
+                    primeiroCampoComErro
+                    ||
+                    nome;
+            }
+
+
+            const valorEmail =
+                email.value.trim();
+
+
+            if (valorEmail === '') {
+
+                marcarErro(
+                    email,
+                    erroEmail,
+                    'Informe seu e-mail.'
+                );
+
+                formularioValido =
+                    false;
+
+                primeiroCampoComErro =
+                    primeiroCampoComErro
+                    ||
+                    email;
+
+            } else if (
+                !emailValido(valorEmail)
+            ) {
+
+                marcarErro(
+                    email,
+                    erroEmail,
+                    'Informe um e-mail válido.'
+                );
+
+                formularioValido =
+                    false;
+
+                primeiroCampoComErro =
+                    primeiroCampoComErro
+                    ||
+                    email;
+            }
+
+
+            if (
+                assunto.value.trim() === ''
+            ) {
+
+                marcarErro(
+                    assunto,
+                    erroAssunto,
+                    'Informe o assunto.'
+                );
+
+                formularioValido =
+                    false;
+
+                primeiroCampoComErro =
+                    primeiroCampoComErro
+                    ||
+                    assunto;
+            }
+
+
+            if (
+                mensagem.value.trim() === ''
+            ) {
+
+                marcarErro(
+                    mensagem,
+                    erroMensagem,
+                    'Informe sua mensagem.'
+                );
+
+                formularioValido =
+                    false;
+
+                primeiroCampoComErro =
+                    primeiroCampoComErro
+                    ||
+                    mensagem;
+            }
+
+
+            if (!formularioValido) {
+
+                statusFormulario.textContent =
+                    'Revise os campos destacados.';
+
+                statusFormulario.classList.add(
+                    'erro'
+                );
+
+
+                if (
+                    primeiroCampoComErro
+                ) {
+
+                    primeiroCampoComErro.focus();
+                }
+
+
+                return;
+            }
+
+
+            statusFormulario.textContent =
+                'Mensagem validada com sucesso!';
+
+            statusFormulario.classList.add(
+                'sucesso'
+            );
+
+
+            formulario.reset();
+        }
+    );
+
+
+    // Remove o erro enquanto o aluno corrige o campo.
+    [
+        [nome, erroNome],
+        [email, erroEmail],
+        [assunto, erroAssunto],
+        [mensagem, erroMensagem]
+    ].forEach(
+        function ([campo, erro]) {
+
+            campo.addEventListener(
+                'input',
+                function () {
+
+                    limparErroCampo(
+                        campo,
+                        erro
+                    );
+                }
+            );
+
+        }
+    );
+}
