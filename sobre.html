@@ -9,18 +9,18 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Sobre - Meu Projeto</title>
+    <title>Início - Meu Projeto Web</title>
 
     <link rel="stylesheet" href="css/style.css">
 
-    <script scr= "js/app.js" defer></script> 
+    <script src="js/script.js" defer></script>
 </head>
 
 <body>
 
     <header class="cabecalho">
 
-        <div class="container">
+        <div class="container cabecalho-conteudo">
 
             <h1>Meu Projeto Web</h1>
 
@@ -29,14 +29,15 @@
                 aria-label="Navegação principal"
             >
 
-                <a href="index.html">
+                <a
+                    class="ativo"
+                    href="index.html"
+                    aria-current="page"
+                >
                     Início
                 </a>
 
-                <a
-                    class="ativo"
-                    href="sobre.html"
-                >
+                <a href="sobre.html">
                     Sobre
                 </a>
 
@@ -55,80 +56,128 @@
 
         <section class="secao">
 
-            <h2>Sobre o projeto</h2>
+            <h2>Bem-vindo ao projeto</h2>
 
-            <article class="card">
-
-                <h3>Projeto de Desenvolvimento Web</h3>
-
-                <p>
-                    Este projeto foi criado durante as
-                    aulas do curso de desenvolvimento web.
-                </p>
-
-                <p>
-                    Inicialmente trabalhamos com HTML
-                    semântico para organizar corretamente
-                    a estrutura da página.
-                </p>
-
-                <p>
-                    Agora estamos utilizando CSS para
-                    trabalhar cores, espaçamentos,
-                    Box Model, layouts fluidos e
-                    responsividade.
-                </p>
-
-            </article>
+            <p>
+                Este projeto está sendo desenvolvido
+                durante as aulas de Front-end.
+            </p>
 
         </section>
 
 
-        <section class="secao">
+        <section
+            id="projetos"
+            class="secao"
+        >
 
-            <h2>Tecnologias utilizadas</h2>
+            <div class="secao-cabecalho">
 
-            <div class="grid-cards">
+                <div>
+                    <p class="tag">Catálogo</p>
+                    <h2>O que estamos aprendendo?</h2>
+                </div>
 
-                <article class="card">
-                    <h3>HTML</h3>
-                    <p>
-                        Responsável pela estrutura
-                        e conteúdo da página.
-                    </p>
-                </article>
-
-                <article class="card">
-                    <h3>CSS</h3>
-                    <p>
-                        Responsável pela aparência,
-                        layout e responsividade.
-                    </p>
-                </article>
-
-                <article class="card">
-                    <h3>JavaScript</h3>
-                    <p>
-                        Será utilizado para adicionar
-                        comportamento e interatividade.
-                    </p>
-                </article>
+                <span
+                    id="contador-selecionados"
+                    class="contador-projetos"
+                >
+                    0 selecionado(s)
+                </span>
 
             </div>
 
-        </section>
 
-    </main>
+            <div class="campo-busca">
+
+                <label for="busca">
+                    Buscar projeto
+                </label>
+
+                <input
+                    type="search"
+                    id="busca"
+                    placeholder="Digite HTML, CSS ou Responsividade"
+                >
+
+            </div>
 
 
-    <footer class="rodape">
-
-        <div class="container">
-            <p>
-                Desenvolvido durante as aulas - SENAC.
+            <p
+                id="status"
+                class="status"
+                role="status"
+                aria-live="polite"
+            >
+                4 projetos encontrados.
             </p>
-        </div>
 
-    </footer>
-</body>
-</html>
+
+            <div
+                class="filtros"
+                aria-label="Filtros do catálogo"
+            >
+
+                <button
+                    type="button"
+                    class="btn-filtro ativo"
+                    data-filtro="todos"
+                >
+                    Todos
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-filtro"
+                    data-filtro="html"
+                >
+                    HTML
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-filtro"
+                    data-filtro="css"
+                >
+                    CSS
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-filtro"
+                    data-filtro="responsivo"
+                >
+                    Responsivo
+                </button>
+
+            </div>
+
+
+            <div
+                id="lista-projetos"
+                class="grid-cards"
+            >
+
+                <article
+                    class="card projeto-card"
+                    data-id="html-semantico"
+                    data-categoria="html"
+                >
+
+                    <h3>HTML Semântico</h3>
+
+                    <p>
+                        Projeto criado para praticar
+                        header, nav, main, section,
+                        article e footer.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="btn-selecionar"
+                        aria-pressed="false"
+                    >
+                        Selecionar
+                    </button>
+
+                </article>

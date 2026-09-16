@@ -1,410 +1,183 @@
-/*================================
-    CONFIGURAÇÕES GERAIS
-==================================*/
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-/*================================
-    VARIÁVEIS
-==================================*/
-
-:root{
-    --cor-primaria: #5b3cc4;
-    --cor-secundaria: #432b98;
-
-    --cor-fundo: #f5f5f5;
-    --cor-card: #ffffff;
-
-    --cor-texto: #222222;
-    --cor-texto-claro: #ffffff;
-    --cor-texto-suave:#666666;
-
-    --cor-borda: #dddddd;
-
-    --espacamento-pequeno: 0.5rem;
-    --espacamento-medio: 1rem;
-    --espacamento-grande: 2rem;
-
-    --raio-borda:8px;
-    --sombra-card: 0 4px 14px rgba(0,0,0,0.08);
-
-}
-
-/*================================
-    BODY
-==================================*/
-body {
-     /*remover o espaco externo padrão*/
-    margin: 0; 
-    /* denifir a cor de fundo */
-    background-color: var(--cor-fundo); 
-    /* Nossa fonte*/
-    font-family: Arial, Helvetica, sans-serif; 
-    /* A cor padrão dos textos */
-    color : var(--cor-texto); 
-    /*Aumente os espaços entre as linahs*/
-    line-height: 1.6; 
-}
-
-/*================================
-    CONTAINER
-==================================*/
-.container{
-    /* O conteudo vai ocupar 90 % do espaço disponivel */
-    width: 90%;
-    /* Pode opupar 90% mas nunca ultrapassar 1200px*/
-    max-width: 1200px;
-    /* Automatico para esquerda*/
-    margin-left: auto;
-    /* Automatico para direita*/
-    margin-right: auto;
-}
-
-/*================================
-    CABEÇALHO
-==================================*/
-.cabecalho{
-    /*margir*/
-    background-color: var(--cor-primaria);
-    /*bordas*/
-    color: var(--cor-texto-claro);
-    /*conteudo*/
-    padding: var(--espacamento-medio);
-
-}
-
-/*================================
-    NAVEGAÇÃO
-==================================*/
-.nav {
-    display: flex;
-    flex-direction: column;
-    gap: var(--espacamento-pequeno);
-
-}
-
-.nav a {
-    color: white;
-    text-decoration: none;
-
-    padding: 0.75ren 1ren ;
-
-    border-radius: var(--raio-borda);
-}
-
-/*hover ele aplica efeto quando passa com o mouser em cima
-do elemento  */
-.nav a:hover{
-    background-color: var(--cor-secundaria);
-}
-
-.nav .ativo {
-    background-color: var(--cor-secundaria);
-}
-
-/*================================
-    SEÇÕES
-==================================*/
-.secao{
-    padding: var(--espacamento-grande);
-}
-
-
-
-
-/*================================
-    GRID
-==================================*/
-.grid-cards {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--espacamento-medio);
-}
-
-/*================================
-    CARD
-==================================*/
-.card {
-    width:300px  ;
-    /* padding: 20px; */
-    background-color: var(--cor-card);
-
-    border: 1px solid var(--cor-borda);
-    border-radius:  var(--raio-borda);
-    padding: var(--espacamento-medio);  
-
-}
-
-.card:hover {
-    transform: translate(-4px);
-}
-
-/*================================
-    AVISO / ASIDE
-==================================*/
-.aviso{
-    /*margin - fora*/
-    margin: var(--espacamento-grande);
-    /*dentro*/
-    padding: var(--espacamento-medio);
-    /*as bordas*/
-    border-left: 4px solid var(--cor-primaria);
-    /*cor do fundo*/
-    background-color: #eee9ff;
-
-}
-
-
-
-
-/*================================
-    FORMULÁRIOS
-==================================*/
-.formulario{
-    background-color: white ;
-    padding: var(--espacamento-medio);
-    border-radius: var(--raio-borda);
-    border: 1px solid var(--cor-borda);
-}
-.campo{
-    margin-bottom: var(--espacamento-medio);
-}
-
-.campo label {
-    display: block;
-    margin-bottom: var(--espacamento-pequeno);
-    font-weight: bold;
-}
-
-.campo input,
-.campo textarea{
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid var(--cor-borda);
-    border-radius: var(--raio-borda);
-    font-size: 1rem;
-}
-
-
-
-/*================================
-    BOTÕES
-==================================*/
-.btn {
-    width: 100%;
-    padding: 0.8rem 1.2rem;
-    border: none;
-    border-radius: var(--raio-borda);
-    background-color: var(--cor-primaria);
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-}
-.btn:hover{
-    background-color: var(--cor-secundaria);
-}
-.form-row{
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--espacamento-medio);
-
-}
-
-
-
-/*================================
-    ACESSIBILIDADE
-==================================*/
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible{
-    outline: 3px solid #ffbf47;
-    outline-offset: 3px;
-}
-
-
-
-
-/*================================
-    RODAPÉ
-==================================*/
-.rodape{
-    margin-top: var(--espacamento-grande) ;
-    
-    padding: var(--espacamento-medio);
-
-    background-color: #222;
-
-    color: white;
-
-    text-align: center;
-
-}
-
-
-/*================================
-    TABLE 
-    A PARTID DE 768PX EXISTE ESPAÇO PARA MAIS ELEMENTOS
-    LADO A LADO.
-==================================*/
-
-@media(min-width: 768px){
-    .form-row{
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .btn{
-        width: auto;
-    }
-    /*Em tablets existe espaco para o menu horzontal*/
-    .nav {
-        flex-direction: row;
-    }
-
-    /*Em tablets os cards pode opupar duas colunas*/
-    .grid-cards{
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/*Desktop */
-@media(min-width:1024px){
-    /*Em telas grandes existe espaço para três cards lado a lado*/
-    .grid-cards{
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-
-
-h1 {
-    font-family: Arial;
-}
-h2{
-    font-family: Arial;
-}
-
-p{
-    font-family: Arial;
-}
-
-
-a {
-    font-family: Arial;
-}
-
-/*Busca*/
-.campo-busca{
-
-    margin-bottom: var(--espacamento-medio);
-}
-
-.campo-busca label {
-    display: block;
-    margin-bottom: var(--espacamento-pequeno);
-    font-weight: bold;
-
-}
-
-.campo-busca input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid var(--cor-borda);
-    border-radius : var(--raio-borda);
-    font-size: 1rem;  
-
-}
-
-/*STATUS*/
-
-.status{
-    margin: 0 0 var(--espacamento-medio);
-    color: var(--cor-texto-suave);
-}
-
-/*FILTROS*/
-
-.filtros{
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--espacamento-pequeno);
-    margin-bottom: var(--espacamento-grande);
-}
-
-.btn-filtro{
-    flex: 1 1 120px;
-    padding: 0.7rem 1rem;
-    border: 1px solid var(--cor-borda);
-    border-radius: var(--raio-borda);
-    background-color: var(--cor-card);
-    color: var(--cor-texto);
-    cursor: pointer;
-}
-
-.btn-filtro:hover,
-.btn-filtro-ativo{
-    background-color: var(--cor-primaria);
-    color: var(--cor-texto-claro);
-    border-color: var(--cor-primaria);
-}
-
-/*CARD*/
-
-.projeto-card{
-    display:flex;
-    flex-direction: column;
-    min-width: 0;
-    gap: var(--espacamento-medio);
-    padding: var(--espacamento-medio);
-    background-color: var(--cor-card);
-    border: 1px solid var(--cor-borda);
-    border-radius: var(--raio-borda);
-    box-shadow: var(--sombra-card);
-    transition: transform 0.2s;
-}
-
-.projeto-card:hover{
-transform: translateY(-4px);
-}
-
-.projeto-card h3,
-.projeto-card p{
-    margin:0;
-}
-
-.projeto-card p{
-    color: var(--cor-texto-suave);
-}
-
-
-/* =====================================
-   AULA 08 - FORMULÁRIO COM JS
-===================================== */
-
-.mensagem-erro {
-    display: block;
-    margin-top: 0.3rem;
-    color: #b00020;
-    font-size: 0.9rem;
-}
-
-.campo input.erro,
-.campo textarea.erro {
-    border-color: #b00020;
-}
-
-.status-formulario {
-    margin-top: 1rem;
-    font-weight: bold;
-}
-
-.status-formulario.sucesso {
-    color: #146c2e;
-}
-
-.status-formulario.erro {
-    color: #b00020;
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Início - Meu Projeto Web</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/script.js" defer></script>
+</head>
+
+<body>
+
+    <header class="cabecalho">
+
+        <div class="container cabecalho-conteudo">
+
+            <h1>Meu Projeto Web</h1>
+
+            <nav
+                class="nav"
+                aria-label="Navegação principal"
+            >
+
+                <a
+                    class="ativo"
+                    href="index.html"
+                    aria-current="page"
+                >
+                    Início
+                </a>
+
+                <a href="sobre.html">
+                    Sobre
+                </a>
+
+                <a href="contato.html">
+                    Contato
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <main class="container">
+
+        <section class="secao">
+
+            <h2>Bem-vindo ao projeto</h2>
+
+            <p>
+                Este projeto está sendo desenvolvido
+                durante as aulas de Front-end.
+            </p>
+
+        </section>
+
+
+        <section
+            id="projetos"
+            class="secao"
+        >
+
+            <div class="secao-cabecalho">
+
+                <div>
+                    <p class="tag">Catálogo</p>
+                    <h2>O que estamos aprendendo?</h2>
+                </div>
+
+                <span
+                    id="contador-selecionados"
+                    class="contador-projetos"
+                >
+                    0 selecionado(s)
+                </span>
+
+            </div>
+
+
+            <div class="campo-busca">
+
+                <label for="busca">
+                    Buscar projeto
+                </label>
+
+                <input
+                    type="search"
+                    id="busca"
+                    placeholder="Digite HTML, CSS ou Responsividade"
+                >
+
+            </div>
+
+
+            <p
+                id="status"
+                class="status"
+                role="status"
+                aria-live="polite"
+            >
+                4 projetos encontrados.
+            </p>
+
+
+            <div
+                class="filtros"
+                aria-label="Filtros do catálogo"
+            >
+
+                <button
+                    type="button"
+                    class="btn-filtro ativo"
+                    data-filtro="todos"
+                >
+                    Todos
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-filtro"
+                    data-filtro="html"
+                >
+                    HTML
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-filtro"
+                    data-filtro="css"
+                >
+                    CSS
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-filtro"
+                    data-filtro="responsivo"
+                >
+                    Responsivo
+                </button>
+
+            </div>
+
+
+            <div
+                id="lista-projetos"
+                class="grid-cards"
+            >
+
+                <article
+                    class="card projeto-card"
+                    data-id="html-semantico"
+                    data-categoria="html"
+                >
+
+                    <h3>HTML Semântico</h3>
+
+                    <p>
+                        Projeto criado para praticar
+                        header, nav, main, section,
+                        article e footer.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="btn-selecionar"
+                        aria-pressed="false"
+                    >
+                        Selecionar
+                    </button>
+
+                </article>
