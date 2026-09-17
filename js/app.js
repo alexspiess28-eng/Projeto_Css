@@ -239,3 +239,23 @@ if (
 
     renderizarCatalogo();
 }
+
+async function carregarProjetos() {
+    try {
+        const resposta = await fetch('data/projetos.json');
+
+        if (!resposta.ok){
+            throw new Error('Erro HTTP:' + resposta.status )
+        }
+
+        const projetos = await resposta.json();
+
+        console.log(projetos);
+        
+    } catch (error) {
+        console.error('Falha ao carregar' , erro );
+    }
+
+}
+
+carregarProjetos();

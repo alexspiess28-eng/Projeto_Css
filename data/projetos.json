@@ -1,0 +1,38 @@
+[
+    {
+        "id":1,
+        "titulo": "HTML Semantico",
+        "descricao": "Projeto criado para praticar header, anav, main, section, article e footer.",
+        "categoria": "html"
+    },
+
+    {
+        "id":2,
+        "titulo": " Box Model",
+        "descricao": "Projeto criado para praticar margin, padding, border e content.",
+        "categoria": "css"
+    },
+
+    {
+        "id":3,
+        "titulo": "Flexbox e Grid",
+        "descricao": "Projeto utilizado para organizar elementos com Flexbox e Grid.",
+        "categoria": "css"
+    },
+
+    {
+        "id":4,
+        "titulo": "Página Responsiva",
+        "descricao": "Projeto criado utilizando Mobile-First e Media Queries.",
+        "categoria": "responsivo"
+    },
+
+    {
+        "id":5,
+        "titulo": "Acessibilidade",
+        "descricao": "Projeto revisado com foco visível, navegação por teclado e mensagens acessíveis.",
+        "categoria": "acessibilidade"
+    }
+
+
+]
